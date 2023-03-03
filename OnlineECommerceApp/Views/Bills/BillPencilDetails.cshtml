@@ -1,0 +1,41 @@
+﻿@using OnlineECommerceApp.Models
+@model  IEnumerable<BillPencil>
+
+@{
+    ViewBag.Title = "BillPencilDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2>Bill Pencil Details</h2>
+<br />
+
+<div style="background-color:lightslategrey">
+    <p>Personel Name: @ViewBag.dgr1</p>
+</div>
+
+<table class="table table-condensed">
+    <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Per Price</th>
+        <th>Total</th>
+
+    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.BillPencilID</td>
+            <td>@x.Description</td>
+            <td>@x.Amount</td>
+            <td>@x.UnitPrice</td>
+            <td>@x.TotalPrice</td>
+
+        </tr>
+
+    }
+
+</table>
+a href="/Bills/CreateBillPencil/" class="btn btn-default" style="background-color:darksalmon">New Pencil Enter</a>
+

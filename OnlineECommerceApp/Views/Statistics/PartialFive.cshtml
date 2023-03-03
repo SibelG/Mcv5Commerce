@@ -1,0 +1,40 @@
+﻿@using OnlineECommerceApp.Models
+@model IEnumerable<ClassGroup3>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Striped Full Width Table</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Branch</th>
+                    <th>Progress Bar</th>
+                    <th style="width: 40px">Product Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int rankNo= 0;}
+                @foreach(var x in Model)
+            {
+                <tr>
+                    <td>@{ rankNo++;}@rankNo</td>
+                    <td>@x.Branch</td>
+                    <td>
+                    <div class="progress progress-xs">
+                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                    </div>
+                     </td>
+                    <td><span class="badge bg-danger">@x.Count</span></td>
+                </tr>
+            }
+                
+            
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>

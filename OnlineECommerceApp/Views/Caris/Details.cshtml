@@ -1,0 +1,49 @@
+﻿@model OnlineECommerceApp.Models.Cari
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div>
+ 
+    <hr />
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CMail)
+            </th>
+
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.CName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.CLastName)
+            </td>
+            <th>
+                @Html.DisplayFor(model => model.CCity)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.CMail)
+            </th>
+        </tr>
+       
+
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit","Caris", new { id = Model.CariID },new {@class="btn btn-success"}) 
+    @Html.ActionLink("Back to List", "Index","Caris", new { @class="btn btn-primary"})
+</p>

@@ -1,0 +1,75 @@
+﻿@model OnlineECommerceApp.Models.SalesAction
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2>Sales Detail Page</h2>
+<br />
+ <hr />
+ <table class="tabel table-condensed">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SalesId)
+            </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Personel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cari)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </th>
+    </tr>
+   
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.SalesId)
+            </td>
+
+            <td>
+                @Html.DisplayFor(model => model.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Personel.PName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Cari.CName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Product.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.TotalPrice)
+            </td>
+        </tr>
+        </table>
+
+
+<p style="margin-top:20px;">
+    <button class="btn btn-default"style="background-color:dodgerblue">Writer</button>
+    @Html.ActionLink("Back to List", "Index","SalesActions",new {@class="btn btn-primary"})
+</p>

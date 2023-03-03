@@ -1,0 +1,43 @@
+﻿@model OnlineECommerceApp.Models.Personel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Personel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PImage)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PersonelID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

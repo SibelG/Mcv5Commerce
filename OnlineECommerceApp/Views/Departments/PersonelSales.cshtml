@@ -1,0 +1,43 @@
+﻿@using OnlineECommerceApp.Models
+@model  IEnumerable<SalesAction>
+@{
+    ViewBag.Title = "PersonelSales";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2>Departman PersonelSales</h2>
+<br />
+
+<div style="background-color:lightslategrey">
+    <p>Personel Name: @ViewBag.dgr1</p>
+</div>
+
+<table class="table table-condensed">
+    <tr>
+        <th>Sales ID</th>
+        <th>Product</th>
+        <th>Cari</th>
+        <th>Price</th>
+        <th>Amount</th>
+        <th>Total</th>
+        <th>Date</th>
+        <th>Writer</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+    <tr>
+        <td>@x.SalesId</td>
+        <td>@x.Product.ProductName</td>
+        <td>@x.Cari.CName @x.Cari.CLastName</td>
+        <td>@x.Price</td>
+        <td>@x.Amount</td>
+        <td>@x.TotalPrice</td>
+        <td>@x.Date</td>
+        <td><a href="#" class="btn btn-default" style="background-color:dodgerblue">Writer</a></td>
+    </tr>
+    
+    }
+
+
+</table>

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<OnlineECommerceApp.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table table-bordered" style="margin-top:20px; margin-right:20px; margin-left:20px;">
+    <tr>
+        <th>
+            @Html.Label("ID")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PurchasePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalesPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductImage)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Brand)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Stock)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PurchasePrice)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SalesPrice)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Status)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductImage)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", "Products", new { id = item.ProductID }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Details", "Details", "Products", new { id = item.ProductID }, new { @class = "btn btn-warning" })
+        @Html.ActionLink("Delete", "Delete", "Products", new { id = item.ProductID }, new { @class = "btn btn-danger" })
+    </td>
+</tr>
+    }
+
+</table>
+<p style="margin-left:20px;">
+    @Html.ActionLink("Create New", "Create","Products", new { @class = "btn btn-success" })
+</p>

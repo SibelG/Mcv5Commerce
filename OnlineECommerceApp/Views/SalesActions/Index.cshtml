@@ -1,0 +1,91 @@
+﻿@model IEnumerable<OnlineECommerceApp.Models.SalesAction>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<table id="tbl1" class="table table-bordered" style="margin-top:20px; margin-right:20px; margin-left:20px;">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cari)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Personel)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @item.Cari.CName @item.Cari.CLastName
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductName)
+            </td>
+            <td>
+                @item.Personel.PName @item.Personel.PLastName
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "SalesActions", new { id = item.SalesId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Details", "Details", "SalesActions", new { id = item.SalesId }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Delete", "Delete", "SalesActions", new { id = item.SalesId }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+    <table />
+
+    <p style="margin-left:20px;">
+        @Html.ActionLink("Make New Sales", "Create", "SalesActions", new { @class = "btn btn-success" })
+    </p>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+
+    <link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+
+    <script>
+
+$('#tbl1').dataTable({});
+
+    </script>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<OnlineECommerceApp.Models.Bill>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Bill Serial No
+        </th>
+        <th>
+            Bill Rank No
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Tax Authority
+        </th>
+        <th>
+            Time
+        </th>
+        <th>
+            Deliver Person
+        </th>
+        <th>
+            Receive Person
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BillSerialNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BillRankNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxAuthority)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeliverPerson)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceivePerson)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit","Bills", new { id=item.BillID },new { @class = "btn btn-primary" })
+            @Html.ActionLink("Details", "BillPencilDetails", "Bills", new { id=item.BillID }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Delete", "Delete", "Bills", new { id=item.BillID },new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>
+<p>
+    @Html.ActionLink("Create New", "Create","Bills",new {@class="btn btn-success"})
+</p>

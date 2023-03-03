@@ -1,0 +1,69 @@
+﻿@using OnlineECommerceApp.Models
+@model IEnumerable<SalesAction>
+@{
+    ViewBag.Title = "MyOrders";
+    Layout = "~/Views/Shared/_CariPanel.cshtml";
+}
+
+<h2>Order History</h2>
+<br />
+
+
+@foreach (var x in Model)
+{
+    <div class="row">
+        <aside class="col-lg-9">
+            <div class="card">
+                <table class="table table-borderless table-shopping-cart">
+                    <thead class="text-muted">
+                        <tr class="small text-uppercase">
+                            <th scope="col">Product</th>
+                            <th scope="col" width="120">Quantity</th>
+                            <th scope="col" width="120">Price</th>
+                            <th scope="col" class="text-right" width="200"> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <figure class="itemside align-items-center">
+                                    <div class="aside"><img src="@x.Product.ProductImage" class="img-sm" style="weight:70px;height:70px;"></div>
+                                    <figcaption class="info">
+                                        <a href="#" class="title text-dark">@x.Product.ProductName</a>
+                                        <p class="text-muted small">Color: 25 Mpx <br> Brand: @x.Product.Brand</p>
+                                    </figcaption>
+                                </figure>
+                            </td>
+                            <td>
+                                <!-- col.// -->
+                                <div class="col">
+                                    <div class="input-group input-spinner">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </button>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{ cart_item.quantity }}">
+                                        <div class="input-group-append">
+                                            <a href="{% url 'add_cart' cart_item.product.id %}" class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </a>
+                                        </div>
+                                    </div> <!-- input-group.// -->
+                                </div> <!-- col.// -->
+                            </td>
+                            <td>
+                                <div class="price-wrap">
+                                    <var class="price">$@x.Price</var>
+                                    <small class="text-muted"> @Convert.ToDateTime(x.Date).ToString("dd/MM/yyyy")</small>
+                                </div> <!-- price-wrap .// -->
+                            </td>
+                            <td class="text-right">
+                                <a href="" class="btn btn-danger"> Remove</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> <!-- card.// -->
+
+        </aside> <!-- col.// -->
+    </div>
+}
+
+
