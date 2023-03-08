@@ -6,11 +6,11 @@
 }
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Personels", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
-<div class="form-horizontal" style="margin-top:20px; margin-left:20px;">
+<div class="form-horizontal" style="margin-top:20px">
 
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -33,15 +33,15 @@
     <div class="form-group">
         @Html.Label("Image", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.PImage, new { htmlAttributes = new { @class = "form-control" } })
+           <input type="file" name="PImage"/>
             @Html.ValidationMessageFor(model => model.PImage, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Department, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form form-control" })
-            @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.DepartmentId, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form form-control" })
+            @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
         </div>
     </div>
 

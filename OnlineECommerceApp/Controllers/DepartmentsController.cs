@@ -27,7 +27,7 @@ namespace OnlineECommerceApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var personel = db.Personels.Where(x=>x.PersonelID==id);
+            var personel = db.Personels.Where(x=>x.DepartmentId==id);
             var dpt = db.Departments.Where(x=>x.DepartmentID==id).Select(y=>y.DepartName).FirstOrDefault();
             ViewBag.d1 = dpt;
             if (personel == null)

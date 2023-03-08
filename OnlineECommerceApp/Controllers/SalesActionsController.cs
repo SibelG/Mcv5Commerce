@@ -73,10 +73,11 @@ namespace OnlineECommerceApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SalesId,Tarih,Amount,Price,TotalPrice")] SalesAction salesAction)
+        public ActionResult Create(SalesAction salesAction)
         {
             if (ModelState.IsValid)
             {
+                salesAction.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
                 db.SalesActions.Add(salesAction);
                 db.SaveChanges();
                 return RedirectToAction("Index");

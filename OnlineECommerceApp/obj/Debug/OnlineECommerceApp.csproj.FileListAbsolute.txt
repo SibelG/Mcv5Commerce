@@ -136,3 +136,9 @@ C:\Users\sblgn\source\repos\OnlineECommerceApp\OnlineECommerceApp\obj\Debug\Onli
 C:\Users\sblgn\source\repos\OnlineECommerceApp\OnlineECommerceApp\obj\Debug\OnlineECommerceApp.Migrations.mig11.resources
 C:\Users\sblgn\source\repos\OnlineECommerceApp\OnlineECommerceApp\obj\Debug\OnlineECommerceApp.Migrations.migDetay.resources
 C:\Users\sblgn\source\repos\OnlineECommerceApp\OnlineECommerceApp\obj\Debug\OnlineECommerceApp.Migrations.migImage.resources
+C:\Users\sblgn\source\repos\OnlineECommerceApp\OnlineECommerceApp\bin\PagedList.dll
+C:\Users\sblgn\source\repos\OnlineECommerceApp\OnlineECommerceApp\bin\PagedList.Mvc.dll
+C:\Users\sblgn\source\repos\OnlineECommerceApp\OnlineECommerceApp\bin\PagedList.xml
+C:\Users\sblgn\source\repos\OnlineECommerceApp\OnlineECommerceApp\bin\PagedList.Mvc.xml
+C:\Users\sblgn\source\repos\OnlineECommerceApp\OnlineECommerceApp\obj\Debug\OnlineECommerceApp.Migrations.cargo.resources
+C:\Users\sblgn\source\repos\OnlineECommerceApp\OnlineECommerceApp\bin\QRCoder.dll

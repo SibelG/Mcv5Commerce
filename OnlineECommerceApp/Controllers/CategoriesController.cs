@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OnlineECommerceApp.Models;
+using PagedList;
 
 namespace OnlineECommerceApp.Controllers
 {
@@ -15,9 +16,9 @@ namespace OnlineECommerceApp.Controllers
         private Context db = new Context();
 
         // GET: Categories
-        public ActionResult Index()
+        public ActionResult Index(int page=1)
         {
-            return View(db.Categories.ToList());
+            return View(db.Categories.ToList().ToPagedList(page,4));
         }
 
         // GET: Categories/Details/5

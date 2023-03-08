@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -36,6 +37,7 @@ namespace OnlineECommerceApp.Controllers
         }
 
         // GET: Personels/Create
+        [HttpGet]
         public ActionResult Create()
         {
             List<SelectListItem> deger1 = (from x in db.Departments.ToList()
@@ -45,6 +47,7 @@ namespace OnlineECommerceApp.Controllers
                                                Value = x.DepartmentID.ToString()
                                            }).ToList();
             ViewBag.dgr1 = deger1;
+
             return View();
         }
 
@@ -53,8 +56,16 @@ namespace OnlineECommerceApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PersonelID,PName,PLastName,PImage,Department")] Personel personel)
+        public ActionResult Create(Personel personel)
         {
+            if (Request.Files.Count > 0)
+            {
+                string fileName = Path.GetFileName(Request.Files[0].FileName);
+                string pathExstension = Path.GetExtension(Request.Files[0].FileName);
+                string path = "~/Image/" + fileName + pathExstension;
+                Request.Files[0].SaveAs(Server.MapPath(path));
+                personel.PImage = "/Image/" + fileName + pathExstension;
+            }
             if (ModelState.IsValid)
             {
                 db.Personels.Add(personel);
@@ -68,15 +79,26 @@ namespace OnlineECommerceApp.Controllers
         // GET: Personels/Edit/5
         public ActionResult Edit(int? id)
         {
+            List<SelectListItem> deger1 = (from x in db.Departments.ToList()
+                                           select new SelectListItem
+                                           {
+                                               Text = x.DepartName,
+                                               Value = x.DepartmentID.ToString()
+                                           }).ToList();
+            ViewBag.d1 = deger1;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+          
+
             Personel personel = db.Personels.Find(id);
             if (personel == null)
             {
                 return HttpNotFound();
             }
+           
             return View(personel);
         }
 
@@ -85,14 +107,24 @@ namespace OnlineECommerceApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PersonelID,PName,PLastName,PTask")] Personel personel)
+        public ActionResult Edit(Personel personel)
         {
+            if (Request.Files.Count > 0)
+            {
+                string fileName = Path.GetFileName(Request.Files[0].FileName);
+                string pathExstension = Path.GetExtension(Request.Files[0].FileName);
+                string path = "~/Image/" + fileName + pathExstension;
+                Request.Files[0].SaveAs(Server.MapPath(path));
+                personel.PImage = "/Image/" + fileName + pathExstension;
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(personel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            
             return View(personel);
         }
 

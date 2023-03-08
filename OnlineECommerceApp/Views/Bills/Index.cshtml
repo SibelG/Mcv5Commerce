@@ -11,61 +11,88 @@
 <table class="table table-bordered">
     <tr>
         <th>
-            Bill Serial No
+            Bill Serial Rank No
         </th>
-        <th>
-            Bill Rank No
-        </th>
+
         <th>
             Date
         </th>
-        <th>
-            Tax Authority
-        </th>
+
         <th>
             Time
         </th>
-        <th>
-            Deliver Person
-        </th>
-        <th>
-            Receive Person
-        </th>
         <th></th>
+        <th></th>
+        <th></th>
+        <th>
+            Popup
+        </th>
+        <th>
+            New Pencil
+        </th>
+
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BillSerialNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BillRankNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TaxAuthority)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Time)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeliverPerson)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReceivePerson)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit","Bills", new { id=item.BillID },new { @class = "btn btn-primary" })
-            @Html.ActionLink("Details", "BillPencilDetails", "Bills", new { id=item.BillID }, new { @class = "btn btn-warning" })
-            @Html.ActionLink("Delete", "Delete", "Bills", new { id=item.BillID },new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.BillSerialNo @item.BillRankNo
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Bills", new { id = item.BillID }, new { @class = "btn btn-primary" })
+            </td>
+            <td> @Html.ActionLink("Details", "BillPencilDetails", "Bills", new { id = item.BillID }, new { @class = "btn btn-warning" })</td>
+            <td> @Html.ActionLink("Delete", "Delete", "Bills", new { id = item.BillID }, new { @class = "btn btn-danger" })</td>
+            <td>
+                <a href="/Bills/Popup/@item.BillID" class="btn btn-default" style="background-color:lightcoral">Popup</a>
+
+            </td>
+            <td> <a href="/Bills/NewPencil/@item.BillID" class="btn btn-default" style="background-color:lightpink">New Pencil</a></td>
+        </tr>
+    }
 
 </table>
 <p>
-    @Html.ActionLink("Create New", "Create","Bills",new {@class="btn btn-success"})
+    @Html.ActionLink("Create New", "Create", "Bills", new { @class = "btn btn-success" })
 </p>
+<br />
+@*<input type="button" class="btn btn-warning"  style="background-color:aquamarine; color:white;width:140px;font-size:12px" data-toggle="modal" data-target="#Modal1">Popup Windows</input>
+
+    <div class="modal" id="Modal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Popup Dialog Screen</h2>
+                </div>
+            </div>
+        </div>
+    </div>*@
+@Ajax.ActionLink("Open Popup", "SomeAction", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "result", InsertionMode = InsertionMode.Replace, OnSuccess = "openPopup" })
+<br />
+
+<div id="result" style="display:none;"></div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#result").dialog({
+        autoOpen: false,
+        title: 'Title',
+        width: 500,
+        height: 'auto',
+        modal: true
+    });
+});
+function openPopup() {
+    $("#result").dialog("open");
+}
+</script>

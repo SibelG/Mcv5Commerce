@@ -1,0 +1,64 @@
+﻿@using  OnlineECommerceApp.Models
+@model IEnumerable<CargoDetail>
+
+@{
+    ViewBag.Title = "CargoTracking";
+    Layout = "~/Views/Shared/_CariPanel.cshtml";
+}
+
+
+@using (Html.BeginForm("Index", "Cargo", FormMethod.Get))
+{
+    <p>
+        Cargo Track No:  @Html.TextBox("p")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.TrackCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Personel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Receiver)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.TrackCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Personel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Receiver)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                
+                @Html.ActionLink("Details", "CargoDetails", "CariPanel", new { id = item.CargoId }, new { @class = "btn btn-warning" })
+               
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+

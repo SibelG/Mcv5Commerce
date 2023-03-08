@@ -98,6 +98,18 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.3.1.32\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="QRCoder">
+      <HintPath>..\..\..\..\Downloads\QRCoder.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -176,9 +188,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -197,18 +206,23 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\BillsController.cs" />
+    <Compile Include="Controllers\CargoController.cs" />
     <Compile Include="Controllers\CariPanelController.cs" />
     <Compile Include="Controllers\CarisController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
+    <Compile Include="Controllers\GraphicController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\PersonelsController.cs" />
     <Compile Include="Controllers\ProductDetailController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\QRController.cs" />
     <Compile Include="Controllers\SalesActionsController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\ToDoController.cs" />
@@ -251,10 +265,16 @@
     <Compile Include="Migrations\202303021155268_migImage.designer.cs">
       <DependentUpon>202303021155268_migImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202303051629586_cargo.cs" />
+    <Compile Include="Migrations\202303051629586_cargo.designer.cs">
+      <DependentUpon>202303051629586_cargo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\BillPencil.cs" />
+    <Compile Include="Models\CargoDetail.cs" />
+    <Compile Include="Models\CargoTracking.cs" />
     <Compile Include="Models\Cari.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Class1.cs" />
@@ -266,6 +286,9 @@
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Detail.cs" />
     <Compile Include="Models\Expense.cs" />
+    <Compile Include="Models\Graphic1.cs" />
+    <Compile Include="Models\Graphics.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Personel.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\SalesAction.cs" />
@@ -2265,6 +2288,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -3032,9 +3056,26 @@
     <Content Include="Views\Shared\_CariPanel.cshtml" />
     <Content Include="Views\CariPanel\Index.cshtml" />
     <Content Include="Views\CariPanel\MyOrders.cshtml" />
+    <Content Include="Views\Alert\Index.cshtml" />
+    <Content Include="Views\Products\MakeSales.cshtml" />
+    <Content Include="Views\Cargo\Index.cshtml" />
+    <Content Include="Views\Cargo\Create.cshtml" />
+    <Content Include="Views\Cargo\CargoTracking.cshtml" />
+    <Content Include="Views\QR\Index.cshtml" />
+    <Content Include="Views\CariPanel\NewMessage.cshtml" />
+    <Content Include="Views\CariPanel\ReceiveMessage.cshtml" />
+    <Content Include="Views\CariPanel\SenderMessage.cshtml" />
+    <Content Include="Views\CariPanel\MessageDetail.cshtml" />
+    <Content Include="Views\CariPanel\CargoTracking.cshtml" />
+    <Content Include="Views\CariPanel\CargoDetails.cshtml" />
+    <Content Include="Views\Graphic\IndexTwo.cshtml" />
+    <Content Include="Views\Graphic\IndexThree.cshtml" />
+    <Content Include="Views\Graphic\IndexFour.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Image\" />
+    <Folder Include="Views\Message\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -3076,6 +3117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202303021155268_migImage.resx">
       <DependentUpon>202303021155268_migImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202303051629586_cargo.resx">
+      <DependentUpon>202303051629586_cargo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

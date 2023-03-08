@@ -1,5 +1,6 @@
-﻿@model IEnumerable<OnlineECommerceApp.Models.Category>
-
+﻿@using OnlineECommerceApp.Models
+@using PagedList
+@model PagedList.IPagedList<Category>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -9,27 +10,29 @@
 <table class="table table-bordered" style="margin-top:20px; margin-right:20px; margin-left:20px;">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CategoryName)
+            @Html.Label("Category Name")
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", "Categories" ,new { id=item.CategoryID }, new { @class="btn btn-primary"})
-            @Html.ActionLink("Details", "Details","Categories", new { id=item.CategoryID }, new { @class = "btn btn-warning" })
-            @Html.ActionLink("Delete", "Delete","Categories", new { id=item.CategoryID }, new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Categories", new { id = item.CategoryID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Details", "Details", "Categories", new { id = item.CategoryID }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Delete", "Delete", "Categories", new { id = item.CategoryID }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
 
 </table>
 
 
+
 <p style="margin-left:20px;">
-    @Html.ActionLink("Create New", "Create","Categories", new { @class = "btn btn-success" })
+    @Html.ActionLink("Create New", "Create", "Categories", new { @class = "btn btn-success" })
 </p>

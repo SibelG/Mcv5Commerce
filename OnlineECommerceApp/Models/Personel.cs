@@ -22,6 +22,8 @@ namespace OnlineECommerceApp.Models
         [Display(Name = "Image")]
         [StringLength(2000)]
         public string PImage { get; set; }
+        [Display(Name ="Email")]
+        public string PMail { get; set; }
         public ICollection<SalesAction> SalesActions { get; set; }
 
         public int? DepartmentId { get; set; }

@@ -19,7 +19,6 @@
         <th>PersonelID</th>
         <th>Name</th>
         <th>LastName</th>
-        <th>İmage</th>
         <th>Sales</th>
     </tr>
     @foreach (var x in Model)
@@ -28,7 +27,6 @@
             <td>@x.PersonelID</td>
             <td>@x.PName</td>
             <td>@x.PLastName</td>
-            <td>@x.PImage</td>
             <td><a href="/Departments/PersonelSales/@x.PersonelID" class="btn btn-default" style="background-color:palevioletred">Sales</a></td>
         </tr>
     }

@@ -50,5 +50,27 @@ namespace OnlineECommerceApp.Controllers
             
 
         }
+        public ActionResult PartialPersonelLogin()
+        {
+            return View();
+
+        }
+        [HttpPost]
+        public ActionResult PartialPersonelLogin(Admin admin)
+        {
+            var Inf=db.Admins.FirstOrDefault(x=>x.AdminName == admin.AdminName && x.Password==admin.Password);
+            if (Inf!= null)
+            {
+                FormsAuthentication.SetAuthCookie(Inf.AdminName, false);
+                Session["AdminName"]=Inf.AdminName.ToString();
+                return RedirectToAction("Index", "Categories");
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+        }
     }
 }

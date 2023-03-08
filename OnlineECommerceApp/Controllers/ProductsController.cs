@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using OnlineECommerceApp.Models;
@@ -15,9 +16,14 @@ namespace OnlineECommerceApp.Controllers
         private Context db = new Context();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(string p)
         {
-            return View(db.Products.Where(x => x.Status == true).ToList());
+            var products = from x in db.Products select x;
+            if (!string.IsNullOrEmpty(p))
+            {
+                products = products.Where(y => y.ProductName.Contains(p));
+            }
+            return View(products.ToList());
             
         }
 
@@ -145,6 +151,45 @@ namespace OnlineECommerceApp.Controllers
             var values=db.Products.ToList();
             return View(values);
 
+        }
+        public ActionResult MakeSales(int? id)
+        {
+            List<SelectListItem> deger1 = (from x in db.Personels.ToList()
+                                           select new SelectListItem
+                                           {
+                                               Text = x.PName + " " + x.PLastName,
+                                               Value = x.PersonelID.ToString()
+
+                                           }).ToList();
+
+            ViewBag.dgr1 = deger1;
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+          
+            ViewBag.dgr2 = product.ProductID;
+            ViewBag.dgr3 = product.SalesPrice;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult MakeSales(SalesAction salesAction)
+        {
+            if (ModelState.IsValid)
+            {
+                salesAction.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
+                db.SalesActions.Add(salesAction);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(salesAction);
         }
     }
 }

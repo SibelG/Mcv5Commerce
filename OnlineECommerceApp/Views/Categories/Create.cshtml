@@ -6,7 +6,7 @@
 }
 
 
-
+<script src="~/Scripts/jquery-3.4.1.js"></script>
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -25,12 +25,18 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" style="border: 1px solid gray; margin-top:5px;" class="btn btn-success" />
+                <input type="submit" value="Create" id="Btn1" style="border: 1px solid gray; margin-top:5px;" class="btn btn-success" />
             </div>
         </div>
+
+        <script>
+            $('#Btn1').click(function () {
+                alert("Category added successfully")
+            });
+        </script>
     </div>
 }
 
 <div style="margin-left:20px;">
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index","Categories",new { @class="btn btn-info"})
 </div>

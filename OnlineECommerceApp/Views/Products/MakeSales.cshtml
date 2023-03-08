@@ -1,0 +1,88 @@
+﻿@model OnlineECommerceApp.Models.SalesAction
+
+@{
+    ViewBag.Title = "MakeSales";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Make Sales</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductId, "ProductId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" name="ProductId" value="@ViewBag.dgr2" class="form-control"/>
+            @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CariId, "CariId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CariId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CariId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PersonelId, "PersonelId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.PersonelId, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form form-control" })
+            @Html.ValidationMessageFor(model => model.PersonelId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="number" name="Amount" class="form-control" id="txt1" onchange="sum();" max="1000" min="0" placeholder="Enter amount"/>
+            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" name="SalesPrice" id="txt2" onkeyup="sum();" value="@ViewBag.dgr3" class="form-control" />
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TotalPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" name="TotalPrice" id="txt3" value="0" class="form-control" readonly/>
+            @Html.ValidationMessageFor(model => model.TotalPrice, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10" style="margin-top:5px;">
+            <input type="submit" value="Create" class="btn btn-success" />
+            @Html.ActionLink("Back to List", "Index", "Products", new { @class = "btn btn-info" })
+        </div>
+    </div>
+</div>
+}
+<br />
+
+<script>
+    function sum() {
+        var number1 = document.getElementById("txt1").value;
+        var number2 = document.getElementById("txt2").value;
+        var result = parseInt(number1) * parseInt(number2);
+        if (!isNaN(result)) {
+            document.getElementById("txt3").value = result;
+        }
+
+    }
+</script>
+

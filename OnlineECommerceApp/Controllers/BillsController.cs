@@ -143,6 +143,11 @@ namespace OnlineECommerceApp.Controllers
 
             return View(billPencil);
         }
+        [HttpGet]
+        public PartialViewResult SomeAction()
+        {
+            return PartialView();
+        }
 
     }
 }
