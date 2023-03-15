@@ -14,7 +14,8 @@ namespace OnlineECommerceApp.Models
         [StringLength(10)]
         public string TrackCode { get; set; }
         public string Personel { get; set; }
-        public string Receiver { get; set; }
+        public int? CariId { get; set; }
+        public virtual Cari Cari { get; set; }
         public DateTime Date { get; set; }
 
     }

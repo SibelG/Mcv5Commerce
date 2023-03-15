@@ -1,0 +1,15 @@
+﻿@model OnlineECommerceApp.Models.Cart
+
+@foreach (var item in Model.Lines)
+{
+    <div class="col-md-6">
+        <figure class="itemside  mb-4">
+            <div class="aside"><img src="@item.Product.ProductImage" class="border img-sm"></div>
+            <figcaption class="info">
+                <p>@item.Product.ProductName </p>
+                <span class="text-muted">@item.Quantity x = $@item.Product.SalesPrice </span>
+            </figcaption>
+        </figure>
+    </div> <!-- col.// -->
+}
+

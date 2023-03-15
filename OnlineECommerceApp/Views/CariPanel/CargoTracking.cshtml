@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "CargoTracking";
-    Layout = "~/Views/Shared/_CariPanel.cshtml";
+    Layout = "~/Views/Shared/_Home.cshtml";
 }
 
 
@@ -25,9 +25,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Personel)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Receiver)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Date)
         </th>
@@ -44,9 +44,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Personel)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Receiver)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
             </td>

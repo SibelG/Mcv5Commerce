@@ -55,7 +55,12 @@
                                 </div> <!-- price-wrap .// -->
                             </td>
                             <td class="text-right">
-                                <a href="" class="btn btn-danger"> Remove</a>
+                                @using (Html.BeginForm("RemoveOrder", "Home", FormMethod.Post))
+                                {
+                                    @Html.Hidden("ProductId", x.Product.ProductID)
+                                    <input class="btn btn-sm btn-warning" type="submit" value="Remove" />
+                                }
+                                @*<a href="" class="btn btn-danger"> Remove</a>*@
                             </td>
                         </tr>
                     </tbody>

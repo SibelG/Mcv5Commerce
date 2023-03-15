@@ -31,8 +31,12 @@ namespace OnlineECommerceApp.Models
         [Display(Name = "Mail")]
         [StringLength(50)]
         public string CMail { get; set; }
+
+        [StringLength(16)]
+        public string Phone { get; set; }
         public bool Status { get; set; }
         public ICollection<SalesAction> SalesActions { get; set; }
+        public ICollection<ShippingDetail> ShippingDetails { get; set; }
 
     }
 }

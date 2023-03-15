@@ -10,6 +10,7 @@ using OnlineECommerceApp.Models;
 
 namespace OnlineECommerceApp.Controllers
 {
+    [Authorize]
     public class DepartmentsController : Controller
     {
         private Context db = new Context();

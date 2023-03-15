@@ -1,0 +1,25 @@
+﻿@model OnlineECommerceApp.Models.CargoTracking
+@{
+    ViewBag.Title = "CargoTracking";
+    Layout = "~/Views/Shared/_Home.cshtml";
+}
+
+
+<table class="table table-striped" style="margin-top:20px;">
+    <tr>
+        <th> @Html.DisplayNameFor(model => model.Description)</th>
+        <th> @Html.DisplayFor(model => model.Date)</th>
+
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.Description)
+        </td>
+        <td>
+            @Model.Date
+        </td>
+    </tr>
+
+
+</table>

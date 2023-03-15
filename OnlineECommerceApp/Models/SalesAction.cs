@@ -12,9 +12,9 @@ namespace OnlineECommerceApp.Models
         public int SalesId { get; set; }
         public DateTime Date { get; set; }
         public int Amount { get; set; }
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
         [Display(Name = "Total Price")]
-        public decimal TotalPrice { get; set; }
+        public decimal? TotalPrice { get; set; }
         public int? ProductId { get; set; }
         public int? CariId { get; set; }
         public int? PersonelId { get; set; }

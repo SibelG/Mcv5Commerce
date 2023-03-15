@@ -1,5 +1,6 @@
 ﻿@using OnlineECommerceApp.Models
 @using PagedList
+@using PagedList.Mvc
 @model PagedList.IPagedList<Category>
 @{
     ViewBag.Title = "Index";
@@ -31,7 +32,8 @@
 
 </table>
 
-
+@Html.PagedListPager((IPagedList)Model, page=>Url.Action("Index", new {page}),new PagedList.Mvc.PagedListRenderOptions
+{ LiElementClasses=new List<string>{ "page-link"} })
 
 <p style="margin-left:20px;">
     @Html.ActionLink("Create New", "Create", "Categories", new { @class = "btn btn-success" })

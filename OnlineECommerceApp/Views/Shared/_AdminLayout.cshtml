@@ -108,9 +108,13 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-calendar"></i></div>
                             Bills
                         </a>
-                        <a class="nav-link" href="/Expenses/Index/">
-                            <div class="sb-nav-link-icon"><i class="fas fa-gift"></i></div>
-                            Expenses
+                        <a class="nav-link" href="/Bills/DynamicBills">
+                            <div class="sb-nav-link-icon"><i class="fas fa-procedures"></i></div>
+                            Dynamic Bills
+                        </a>
+                        <a class="nav-link" href="/Personels/PersonelList/">
+                            <div class="sb-nav-link-icon"><i class="fas fa-procedures"></i></div>
+                            Personel Table
                         </a>
                         <a class="nav-link" href="/Cargo/Index/">
                             <div class="sb-nav-link-icon"><i class="fas fa-university"></i></div>
@@ -136,10 +140,15 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-university"></i></div>
                             Product Details
                         </a>
-                        <a class="nav-link" href="/Statistics/SimpleTable/">
-                            <div class="sb-nav-link-icon"><i class="fas fa-bar-chart"></i></div>
-                            Simple Tables
-                        </a>
+                        @if (User.IsInRole("A"))
+
+                        {
+                            <a class="nav-link" href="/Statistics/SimpleTable/">
+                                <div class="sb-nav-link-icon"><i class="fas fa-bar-chart"></i></div>
+                                Simple Tables
+                            </a>
+                        }
+
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">

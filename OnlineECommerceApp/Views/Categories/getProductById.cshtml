@@ -1,0 +1,56 @@
+﻿@model OnlineECommerceApp.Models.Cascading
+@{
+    ViewBag.Title = "getProductById";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+
+    $(function () {
+
+        $('#DrpCategory').change(function () {
+
+            var id = $('#DrpCategory').val();
+
+            $.ajax({
+
+                url: '/Categories/getProduct',
+
+                data: { p: id },
+
+                type: "POST",
+
+                dataType: "Json",
+
+                success: function (data) {
+
+                    console.log(data);
+
+                    $('#DrpProduct').empty();
+
+                    for (var i = 0; i < data.length; i++) {
+
+                        $('#DrpProduct').append("<option value='" + data[i].Value + "'>" + data[i].Text + "</Option>");
+
+                    }
+
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+
+<div>
+    @Html.Label("Categories")
+    @Html.DropDownList("DrpCategory", Model.Categories, "---Select Category---", new { @class = "form form-control" })
+    <br />
+    @Html.Label("Products")
+    @Html.DropDownList("DrpProduct", Model.Products, "---Select Product---", new { @class = "form form-control" })
+</div>

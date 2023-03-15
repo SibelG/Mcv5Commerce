@@ -36,6 +36,7 @@ namespace OnlineECommerceApp.Controllers
             return View(category);
         }
 
+        [Authorize(Roles="A")]
         // GET: Categories/Create
         public ActionResult Create()
         {
@@ -123,6 +124,26 @@ namespace OnlineECommerceApp.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult getProductById()
+        {
+            Cascading cs=new Cascading();
+            cs.Categories = new SelectList(db.Categories, "CategoryID", "CategoryName");
+            cs.Products= new SelectList(db.Products, "ProductID", "ProductName");
+            return View(cs);
+        }
+        public JsonResult getProduct(int? p)
+        {
+            var productList = (from x in db.Products
+                               join y in db.Categories
+                               on x.Category.CategoryID equals y.CategoryID
+                               where x.Category.CategoryID == p
+                               select new
+                               {
+                                   Text = x.ProductName,
+                                   Value = x.ProductID.ToString(),
+                               }).ToList();
+            return Json(productList,JsonRequestBehavior.AllowGet);
         }
     }
 }

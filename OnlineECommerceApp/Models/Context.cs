@@ -24,6 +24,8 @@ namespace OnlineECommerceApp.Models
         public DbSet<CargoDetail> CargoDetails { get; set; }
         public DbSet<CargoTracking> CargoTrackings { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderLine> OrderLines { get; set; }    
 
 
 

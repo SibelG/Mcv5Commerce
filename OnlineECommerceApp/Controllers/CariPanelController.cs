@@ -1,6 +1,7 @@
 ﻿using OnlineECommerceApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -20,13 +21,17 @@ namespace OnlineECommerceApp.Controllers
         {
             int totalCoupon = 0;
             var mail = (string)Session["CMail"];
-            var values = db.Caris.FirstOrDefault(x => x.CMail == mail);
+            var values = db.Messages.Where(x => x.Receiver == mail).ToList();
             ViewBag.mail = mail;
+            var city = db.Caris.Where(x => x.CMail == mail).Select(y => y.CCity).FirstOrDefault();
+            ViewBag.city = city;    
             var cariId= db.Caris.Where(x=>x.CMail == mail).Select(y=>y.CariID).FirstOrDefault();
             var salesCount = db.SalesActions.Where(x => x.CariId == cariId).Count();
             ViewBag.totalSales = salesCount;
             var totalCount = db.SalesActions.Where(x => x.CariId == cariId).Sum(y => y.TotalPrice);
             ViewBag.totalCount = totalCount;
+            var name = db.Caris.Where(x => x.CMail == mail).Select(y => y.CName + "" + y.CLastName).FirstOrDefault();
+            ViewBag.name= name;
             if (totalCount < 100)
             {
                 totalCoupon=50;
@@ -43,6 +48,40 @@ namespace OnlineECommerceApp.Controllers
             ViewBag.totalCoupon = totalCoupon;
             return View(values);
         }
+
+      
+        public PartialViewResult Settings()
+        {
+            var mail = (string)Session["CMail"];
+            var id = db.Caris.Where(x=>x.CMail==mail).Select(y => y.CariID).FirstOrDefault();
+            var cari = db.Caris.Find(id);
+          
+            return PartialView("Settings",cari);
+        }
+        public PartialViewResult Notices()
+        {
+            var values = db.Messages.Where(x => x.Sender == "admin@gmail.com");
+            return PartialView(values);
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(Cari cari)
+        {
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(cari).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index","CariPanel");
+
+                
+            }
+            return RedirectToAction("Index", "CariPanel");
+
+
+        }
+
         public ActionResult MyOrders()
         {
             var mail = (string)Session["CMail"];
@@ -165,6 +204,7 @@ namespace OnlineECommerceApp.Controllers
             Session.Abandon();
             return RedirectToAction("Index","Login");
         }
+        
 
     }
 }

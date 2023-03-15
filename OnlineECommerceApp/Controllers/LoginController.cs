@@ -8,6 +8,7 @@ using System.Web.Security;
 
 namespace OnlineECommerceApp.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         Context db = new Context();
@@ -41,7 +42,7 @@ namespace OnlineECommerceApp.Controllers
             {
                 FormsAuthentication.SetAuthCookie(cariInf.CMail, false);
                 Session["CMail"]=cariInf.CMail.ToString();
-                return RedirectToAction("Index", "CariPanel");
+                return RedirectToAction("Index", "Home");
             }
             else
             {

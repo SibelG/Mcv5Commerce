@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using OnlineECommerceApp.Models;
+
 
 namespace OnlineECommerceApp.Controllers
 {
@@ -147,6 +149,35 @@ namespace OnlineECommerceApp.Controllers
         public PartialViewResult SomeAction()
         {
             return PartialView();
+        }
+        public ActionResult DynamicBills()
+        {
+            DynamicBills dynamic = new DynamicBills();
+            dynamic.value1=db.Bills.ToList();
+            dynamic.value2 = db.BillPencils.ToList();
+            return View(dynamic);
+        }
+        [HttpGet]
+        public ActionResult SaveBill()
+        {
+            var date = DateTime.Parse(DateTime.Now.ToShortDateString());
+            ViewBag.date = date;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveBill(Bill bill)
+        {
+            if (ModelState.IsValid)
+            {
+
+                db.Bills.Add(bill);
+                db.SaveChanges();
+                return Json("Success", JsonRequestBehavior.AllowGet);
+                
+            }
+            return View(bill);
         }
 
     }

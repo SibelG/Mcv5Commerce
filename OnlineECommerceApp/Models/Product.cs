@@ -20,9 +20,9 @@ namespace OnlineECommerceApp.Models
         public string Brand { get; set; }
         public short Stock { get; set; }
         [Display(Name = "Purchase  Price")]
-        public decimal PurchasePrice { get; set; }
+        public decimal? PurchasePrice { get; set; }
         [Display(Name = "Sales Price")]
-        public decimal SalesPrice { get; set; }
+        public decimal? SalesPrice { get; set; }
         public bool Status { get; set; }
         [Display(Name = "Image")]
         [StringLength(250)]
