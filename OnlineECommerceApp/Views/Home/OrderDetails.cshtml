@@ -1,35 +1,31 @@
-﻿
+﻿@using OnlineECommerceApp.Models
+@model OnlineECommerceApp.Models.OrderDetailsModel
+
 @{
-    ViewBag.Title = "Complated";
+    ViewBag.Title = "OrderDetails";
     Layout = "~/Views/Shared/_Home.cshtml";
 }
 
-@model OnlineECommerceApp.Models.OrderDetailsModel
-@{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-}
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
 
-            <h2>Sipariş Detay Bilgileri</h2>
+            <h2>Order Detail Informations</h2>
             <hr />
-            @if (TempData["message"] != null)
-            {
-                <div class="alert alert-success">
-                    @TempData["message"]
-                </div>
-            }
-            <dl class="row">
-                <dt class="col-sm-3">User Name</dt>
-                <dd class="col-sm-9">@Model.FirstName</dd>
 
+            <dl class="row">
 
                 <dt class="col-sm-3">Order State</dt>
                 <dd class="col-sm-9">
-                  @Model.OrderState
+                    @if (Model.OrderState == EnumOrderState.Created)
+                    {
+                        <span class="badge-danger">Awaiting</span>
+                    }
+                    else if (Model.OrderState == EnumOrderState.Completed)
+                    {
+                        <span class="badge-success">Order Completed</span>
+                    }
                 </dd>
 
                 <dt class="col-sm-3">Order Id</dt>
@@ -57,8 +53,6 @@
                     @Model.City - @Model.Neighborhood - @Model.Building
                     <br />
                     @Model.PostalCode
-                    <br />
-                    @Model.ZipCode
                 </dd>
 
                 <dt class="col-sm-3">Products</dt>
@@ -80,7 +74,7 @@
                             {
                                 <tr>
                                     <td>
-                                        <img src="/Upload/@item.Image" width="70" />
+                                        <img src="@item.Image" width="70" />
                                     </td>
                                     <td>
                                         @item.ProductName
@@ -93,7 +87,7 @@
                                         @item.Price
                                     </td>
                                     <td>
-                                        <a href="/Home/Details/@item.ProductId" class="btn btn-primary btn-sm" target="_blank">
+                                        <a href="/Home/OrderDetails/@item.ProductId" class="btn btn-primary btn-sm" target="_blank">
                                             <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                             Product Details
                                         </a>
@@ -109,6 +103,4 @@
         </div>
     </div>
 </div>
-
-
 

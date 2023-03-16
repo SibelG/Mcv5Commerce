@@ -341,12 +341,13 @@
     <Compile Include="Models\Graphics.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\OrderDetails.cs" />
+    <Compile Include="Models\OrderDetailsModel.cs" />
     <Compile Include="Models\Personel.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\SalesAction.cs" />
     <Compile Include="Models\ShippingDetail.cs" />
     <Compile Include="Models\ToDo.cs" />
+    <Compile Include="Models\UserOrderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Roles\AdminRoleProvier.cs" />
   </ItemGroup>
@@ -3236,6 +3237,7 @@
     <Content Include="Views\Home\CargoTracking.cshtml" />
     <Content Include="Views\Home\Basket.cshtml" />
     <Content Include="Views\Home\Complated.cshtml" />
+    <Content Include="Views\Home\OrderDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

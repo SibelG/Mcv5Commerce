@@ -163,7 +163,16 @@
                                 </div>
                             </div> <!-- row.// -->
                             <hr>
-                            <a href="/Home/Cart/" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+                            @using (Html.BeginForm("AddToCart", "Home", FormMethod.Post))
+                            {
+
+                                @Html.Hidden("ProductId", Model.ProductID)
+
+                                <input type="submit" class="btn btn-block btn-success" value="Add to cart" />
+                                @*<a href="/Home/Cart/" class="btn btn-block btn-success">Add to cart </a>*@
+
+                            }
+                            @*<a href="/Home/Cart/" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>*@
                         </article> <!-- product-info-aside .// -->
                     </main> <!-- col.// -->
                 </div> <!-- row.// -->

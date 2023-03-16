@@ -1,5 +1,5 @@
 ﻿@using OnlineECommerceApp.Models
-@model IEnumerable<SalesAction>
+@model IEnumerable<UserOrderModel>
 
 @{
     ViewBag.Title = "MyOrders";
@@ -86,21 +86,7 @@
                         </div>
                     </form> <!-- search-wrap .end// -->
                 </div> <!-- col.// -->
-                <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
-                    <div class="d-flex justify-content-end mb-3 mb-lg-0">
-                        <div class="widget-header">
-                            <small class="title text-muted">Welcome guest!</small>
-                            <div>
-                                <a href="./signin.html">Sign in</a> <span class="dark-transp"> | </span>
-                                <a href="./register.html"> Register</a>
-                            </div>
-                        </div>
-                        <a href="./cart.html" class="widget-header pl-3 ml-3">
-                            <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
-                            <span class="badge badge-pill badge-danger notify">0</span>
-                        </a>
-                    </div> <!-- widgets-wrap.// -->
-                </div> <!-- col.// -->
+                @Html.Partial("Basket","Home")
             </div> <!-- row.// -->
         </div> <!-- container.// -->
     </section> <!-- header-main .// -->
@@ -113,86 +99,89 @@
     <div class="container">
 
 
-
-        <!-- ============================ COMPONENT 2 ================================= -->
         <div class="row">
-            <main class="col-md-8">
+            <aside class="col-lg-9">
+                <div class="card">
+                    @if (Model.Count() > 0)
+                    {
+                        <table class="table table-borderless table-shopping-cart">
+                            <thead class="text-muted">
+                                <tr class="small text-uppercase">
+                                    <th>Order Number</th>
+                                    <th>Order Date</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                    <th scope="col" class="text-right" width="200"> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="col">
+                                                <div class="input-group input-spinner">
 
-                <article class="card mb-4">
-                    <div class="card-body">
-                        <h4 class="card-title mb-4">my Orders</h4>
-                        <div class="row">
+                                                    <input type="text" class="form-control" value="@item.OrderNumber">
 
-                            @foreach (var item in Model)
-                            {
-                                <div class="col-md-6">
-                                    <figure class="itemside  mb-4">
-                                        <div class="aside"><img src="@item.Product.ProductImage" class="border img-sm"></div>
-                                        <figcaption class="info">
-                                            <p>@item.Product.ProductName </p>
-                                            <span class="text-muted">@item.Amount x = $@item.Product.PurchasePrice </span>
-                                        </figcaption>
-                                    </figure>
-                                </div> <!-- col.// -->
-                            }
+                                                </div> <!-- input-group.// -->
+                                            </div> <!-- col.// -->
+                                        </td>
+                                        <td>
+                                            <!-- col.// -->
+                                            <div class="col">
+                                                <div class="input-group input-spinner">
 
-                        </div> <!-- row.// -->
-                    </div> <!-- card-body.// -->
-                </article> <!-- card.// -->
+                                                    <input type="text" class="form-control" value="@item.OrderDate.ToShortDateString()">
 
+                                                </div> <!-- input-group.// -->
+                                            </div> <!-- col.// -->
+                                        </td>
+                                        <td>
+                                            <div class="col">
+                                                <div class="input-group input-spinner">
+                                                    <i class="fa fa-try" aria-hidden="true"></i>
+                                                    <input type="text" class="form-control" value="@item.Total">
 
-                <article class="accordion" id="accordion_pay">
-                    <div class="card">
-                        <header class="card-header">
-                            <img src="./images/misc/payment-paypal.png" class="float-right" height="24">
-                            <label class="form-check collapsed" data-toggle="collapse" data-target="#pay_paynet">
-                                <input class="form-check-input" name="payment-option" checked type="radio" value="option2">
-                                <h6 class="form-check-label">
-                                    Paypal
-                                </h6>
-                            </label>
-                        </header>
-                        <div id="pay_paynet" class="collapse show" data-parent="#accordion_pay">
-                            <div class="card-body">
-                                <p class="text-center text-muted">Connect your PayPal account and use it to pay your bills. You'll be redirected to PayPal to add your billing information.</p>
-                                <p class="text-center">
-                                    <a href="#"><img src="./images/misc/btn-paypal.png" height="32"></a>
-                                    <br><br>
-                                </p>
-                            </div> <!-- card body .// -->
-                        </div> <!-- collapse .// -->
-                    </div> <!-- card.// -->
-                    <div class="card">
-                        <header class="card-header">
-                            <img src="./images/misc/payment-card.png" class="float-right" height="24">
-                            <label class="form-check" data-toggle="collapse" data-target="#pay_payme">
-                                <input class="form-check-input" name="payment-option" type="radio" value="option2">
-                                <h6 class="form-check-label"> Credit Card  </h6>
-                            </label>
-                        </header>
-                        <div id="pay_payme" class="collapse" data-parent="#accordion_pay">
-                            <div class="card-body">
-                                <p class="alert alert-success">Some information or instruction</p>
-                                <form class="form-inline">
-                                    <input type="text" class="form-control mr-2" placeholder="xxxx-xxxx-xxxx-xxxx" name="">
-                                    <input type="text" class="form-control mr-2" style="width: 100px" placeholder="dd/yy" name="">
-                                    <input type="number" maxlength="3" class="form-control mr-2" style="width: 100px" placeholder="cvc" name="">
-                                    <button class="btn btn btn-success">Button</button>
-                                </form>
-                            </div> <!-- card body .// -->
-                        </div> <!-- collapse .// -->
-                    </div> <!-- card.// -->
+                                                </div> <!-- input-group.// -->
+                                            </div> <!-- col.// -->
+                                        </td>
+                                        <td>
+                                            <div class="col">
+                                                <div class="input-group input-spinner">
 
-                </article>
-                <!-- accordion end.// -->
+                                                    <input type="text" class="form-control" value="@item.OrderState">
 
-            </main> <!-- col.// -->
-            <aside class="col-md-4">
+                                                </div> <!-- input-group.// -->
+                                            </div> <!-- col.// -->
+                                        </td>
+                                        <td class="text-right">
+
+                                            <a href="/Home/OrderDetails/@item.Id" class="btn btn-danger"> Details</a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning" role="alert">
+                            Your Order is Empty
+                        </div>
+                    }
+
+                </div> <!-- card.// -->
+
+            </aside> <!-- col.// -->
+            <aside class="col-lg-3">
+
                 <div class="card">
                     <div class="card-body">
                         <dl class="dlist-align">
                             <dt>Total price:</dt>
-                            <dd class="text-right">$69.97</dd>
+                            <dd class="text-right">$</dd>
                         </dl>
                         <dl class="dlist-align">
                             <dt>Tax:</dt>
@@ -200,19 +189,21 @@
                         </dl>
                         <dl class="dlist-align">
                             <dt>Total:</dt>
-                            <dd class="text-right text-dark b"><strong>$59.97</strong></dd>
+                            <dd class="text-right text-dark b"><strong>$</strong></dd>
                         </dl>
                         <hr>
                         <p class="text-center mb-3">
-                            <img src="./images/misc/payments.png" height="26">
+                            <img src="~/greatkart/images/misc/payments.png" height="26">
                         </p>
-                        <a href="./place-order.html" class="btn btn-primary btn-block"> Again Place Order </a>
-
+                        <a href="/Home/CheckOut/" class="btn btn-primary btn-block">CheckOut</a>
+                        <a href="/Home/Store/" class="btn btn-light btn-block">Continue Shopping</a>
                     </div> <!-- card-body.// -->
                 </div> <!-- card.// -->
+
             </aside> <!-- col.// -->
+
+
         </div> <!-- row.// -->
-        <!-- ============================ COMPONENT 2 END//  ================================= -->
 
 
 

@@ -1,18 +1,32 @@
 ﻿@model OnlineECommerceApp.Models.Cart
 
 <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
-                 <div class="d-flex justify-content-end mb-3 mb-lg-0">
-                     <div class="widget-header">
-                         <small class="title text-muted">Welcome guest!</small>
-                         <div>
-                             <a href="./signin.html">Sign in</a> <span class="dark-transp"> | </span>
-                             <a href="./register.html"> Register</a>
-                         </div>
-                     </div>
-                     <a href="./cart.html" class="widget-header pl-3 ml-3">
-                         <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
-                         <span class="badge badge-pill badge-danger notify">@Model.Lines.Count</span>
-                     </a>
-                 </div>
+    <div class="d-flex justify-content-end mb-3 mb-lg-0">
+        @if (Request.IsAuthenticated)
+        {
+            <div class="widget-header">
+                <small class="title text-muted">@User.Identity.Name!</small>
+                <div>
+                    <a href="CariPanel/SignOut/">Sign Out</a> <span class="dark-transp"> | </span>
+                    <a href="./register.html"> Register</a>
+                </div>
+            </div>
+        }
+        else
+        {
+
+            <div class="widget-header">
+                <small class="title text-muted">Welcome guest!</small>
+                <div>
+                    <a href="/Login/Index/">Sign in</a> <span class="dark-transp"> | </span>
+                    <a href="./register.html"> Register</a>
+                </div>
+            </div>
+        }
+        <a href="./cart.html" class="widget-header pl-3 ml-3">
+            <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
+            <span class="badge badge-pill badge-danger notify">@Model.Lines.Count</span>
+        </a>
+    </div>
 
 </div>  

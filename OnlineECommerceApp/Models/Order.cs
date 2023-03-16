@@ -28,6 +28,12 @@ namespace OnlineECommerceApp.Models
         public int? CariId { get; set; }
         public virtual Cari Cari { get; set; }
         public virtual List<OrderLine> Orderlines { get; set; }
+
+
+        public List<OrderLine> OrderLines
+        {
+            get { return Orderlines; }
+        }
     }
 
     public class OrderLine

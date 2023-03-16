@@ -156,7 +156,7 @@ namespace OnlineECommerceApp.Controllers
         }
         public ActionResult Complated()
         {
-            return View(new OrderDetails());
+            return View(new OrderDetailsModel());
         }
 
         [HttpPost]
@@ -234,11 +234,55 @@ namespace OnlineECommerceApp.Controllers
             db.SaveChanges();
         }
         public ActionResult MyOrders()
+
         {
+            var total = GetCart().ComputeTotalValue();    
+            ViewBag.Total = total;  
             var mail = (string)Session["CMail"];
             var id = db.Caris.Where(x => x.CMail == mail.ToString()).Select(y => y.CariID).FirstOrDefault();
-            var values = db.Orders.Where(x => x.CariId == id).ToList();
-            return View(values);
+            var orders = db.Orders.Where(x => x.CariId == id)
+             .Select(x => new UserOrderModel()
+             {
+                 Id = x.Id,
+                 Total = x.Total,
+                 OrderNumber = x.OrderNumber,
+                 OrderState = x.OrderState,
+                 OrderDate = x.OrderDate
+             }).OrderByDescending(x => x.OrderDate)
+             .ToList();
+            return View(orders);
+         
+        }
+
+        public ActionResult OrderDetails(int? id)
+        {
+
+            var entity = db.Orders.Where(x => x.Id == id)
+                .Select(x => new OrderDetailsModel()
+                {
+                    OrderId = x.Id,
+                    OrderNumber = x.OrderNumber,
+                    Total = x.Total,
+                    OrderDate = x.OrderDate,
+                    OrderState = x.OrderState,
+                    AddressTitle = x.AddressTitle,
+                    Street = x.Street,
+                    City = x.City,
+                    Neighborhood = x.Neighborhood,
+                    Building= x.Building,
+                    PostalCode = x.PostalCode,
+                    ZipCode = x.ZipCode,    
+                    Orderlines = x.Orderlines.Select(a => new OrderLineModel()
+                    {
+                        Quantity = a.Quantity,
+                        Price = a.Price,
+                        ProductId = a.ProductId,
+                        ProductName = a.Product.ProductName.Length > 50 ? a.Product.ProductName.Substring(0, 40) + ".." : a.Product.ProductName,
+                        Image = a.Product.ProductImage
+                    }).ToList()
+                }).FirstOrDefault();
+
+            return View();
         }
 
 
