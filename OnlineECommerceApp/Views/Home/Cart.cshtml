@@ -5,214 +5,214 @@
 }
 
 
-
-<header class="section-header">
-    <nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop5" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarTop5">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link"> English </a>
-
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link"> USD </a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-user"></i>
-                            My Account
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/CariPanel/Index/">My Profiles</a>
-                            <a class="dropdown-item" href="/Home/MyOrders/">My Orders</a>
-                            <a class="dropdown-item" href="/CariPanel/Notices/">Notices</a>
-                            <a class="dropdown-item" href="/CariPanel/ReceiveMessage/">My Messages</a>
-                           
-                        </div>
-                    </li>
+@Html.Partial("_HeaderPartial", "Home")
 
 
-                    <li><a href="#" class="nav-link"> <i class="fa fa-envelope"></i> Email </a></li>
-                    <li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Call us </a></li>
-                </ul>
+<section class="section-content padding-y bg">
+    <div class="container">
+
+        <!-- ============================ COMPONENT 1 ================================= -->
+
+        <div class="row">
+            <aside class="col-lg-9">
+                <div class="card">
+                    @if (Model.Lines.Count > 0)
+                    {
+                        <table class="table table-borderless table-shopping-cart" id="cartList">
+                            <thead class="text-muted">
+                                <tr class="small text-uppercase">
+                                    <th scope="col">Product</th>
+                                    <th scope="col" width="120">Quantity</th>
+                                    <th scope="col" width="120">Price</th>
+                                    <th scope="col" class="text-right" width="200"> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Lines)
+                                {
+                                    <tr id="@item.Product.ProductID">
+
+                                        <td>
+                                            <figure class="itemside align-items-center">
+                                                <div class="aside"><img src="@item.Product.ProductImage" class="img-sm"></div>
+                                                <figcaption class="info">
+                                                    <a href="#" class="title text-dark">@item.Product.ProductName</a>
+                                                    <p class="text-muted small">Price: $@item.Product.SalesPrice <br> Brand: @item.Product.Brand</p>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td>
+                                            <!-- col.// -->
+                                            <div class="col">
+                                                <div class="input-group input-spinner">
+                                                    <div class="input-group-prepend">
+
+                                                        @using (Html.BeginForm("RemoveToItem", "Home", FormMethod.Post))
+                                                        {
+
+                                                            @Html.Hidden("ProductId", item.Product.ProductID)
+                                                            <input class="btn btn-light" type="submit" value="-" />
 
 
-            </div> <!-- navbar-collapse .// -->
-        </div> <!-- container //  -->
-    </nav>
+                                                        }
 
-    <section class="header-main border-bottom">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-2 col-md-3 col-6">
-                    <a href="./" class="brand-wrap">
-                        <img class="logo" src="./images/logo.png">
-                    </a> <!-- brand-wrap.// -->
-                </div>
-                <div class="col-lg col-sm col-md col-6 flex-grow-0">
-                    <div class="category-wrap dropdown d-inline-block float-right">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bars"></i> All category
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Machinery / Mechanical Parts / Tools </a>
-                            <a class="dropdown-item" href="#">Consumer Electronics / Home Appliances </a>
-                            <a class="dropdown-item" href="#">Auto / Transportation</a>
-                            <a class="dropdown-item" href="#">Apparel / Textiles / Timepieces </a>
-                            <a class="dropdown-item" href="#">Home & Garden / Construction / Lights </a>
-                            <a class="dropdown-item" href="#">Beauty & Personal Care / Health </a>
-                        </div>
-                    </div>  <!-- category-wrap.// -->
-                </div> <!-- col.// -->
-                <a href="./store.html" class="btn btn-outline-primary">Store</a>
-                <div class="col-lg  col-md-6 col-sm-12 col">
-                    <form action="#" class="search">
-                        <div class="input-group w-100">
-                            <input type="text" class="form-control" style="width:60%;" placeholder="Search">
+                                                    </div>
+                                                    <input type="text" class="form-control" id="spnCart" value="@item.Quantity">
+                                                    <div class="input-group-append">
+                                                        @*<button class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-plus"></i> </button>*@
+                                                        @using (Html.BeginForm("AddToCart", "Home", FormMethod.Post))
+                                                        {
 
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form> <!-- search-wrap .end// -->
-                </div> <!-- col.// -->
-            @Html.Action("Basket","Home")
-            
-        </div> <!-- container.// -->
-    </section> <!-- header-main .// -->
+                                                            @Html.Hidden("ProductId", item.Product.ProductID)
+                                                            <input class="btn btn-light" type="submit" value="+" />
 
 
-
-</header> <!-- section-header.// -->
-
-
-    <section class="section-content padding-y bg">
-        <div class="container">
-
-            <!-- ============================ COMPONENT 1 ================================= -->
-
-            <div class="row">
-                <aside class="col-lg-9">
-                    <div class="card">
-                        @if (Model.Lines.Count > 0)
-                        {
-                            <table class="table table-borderless table-shopping-cart">
-                                <thead class="text-muted">
-                                    <tr class="small text-uppercase">
-                                        <th scope="col">Product</th>
-                                        <th scope="col" width="120">Quantity</th>
-                                        <th scope="col" width="120">Price</th>
-                                        <th scope="col" class="text-right" width="200"> </th>
+                                                        }
+                                                    </div>
+                                                </div> <!-- input-group.// -->
+                                            </div> <!-- col.// -->
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap">
+                                                <p class="price" id="price">$@((item.Quantity * item.Product.SalesPrice))</p>
+                                                <small class="text-muted" id="text-muted">$@item.Product.SalesPrice each </small>
+                                            </div> <!-- price-wrap .// -->
+                                        </td>
+                                        <td class="text-right">
+                                            @using (Html.BeginForm("RemoveFromCart", "Home", FormMethod.Post))
+                                            {
+                                                @Html.Hidden("ProductId", item.Product.ProductID)
+                                                <input class="btn btn-sm btn-warning" type="submit" value="Remove" />
+                                            }
+                                            @*<a href="" class="btn btn-danger"> Remove</a>*@
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.Lines)
-                                    {
-                                        <tr>
-                                            <td>
-                                                <figure class="itemside align-items-center">
-                                                    <div class="aside"><img src="@item.Product.ProductImage" class="img-sm"></div>
-                                                    <figcaption class="info">
-                                                        <a href="#" class="title text-dark">@item.Product.ProductName</a>
-                                                        <p class="text-muted small">Price: $@item.Product.SalesPrice <br> Brand: @item.Product.Brand</p>
-                                                    </figcaption>
-                                                </figure>
-                                            </td>
-                                            <td>
-                                                <!-- col.// -->
-                                                <div class="col">
-                                                    <div class="input-group input-spinner">
-                                                        <div class="input-group-prepend">
-                                                            @using (Html.BeginForm("AddToCart", "Home", FormMethod.Post))
-                                                            {
-                                                                @Html.Hidden("ProductId", item.Product.ProductID)
-                                                                <button class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </button>
-
-                                                            }
-                                                       
-
-                                                        </div>
-                                                        <input type="text" class="form-control" value="@item.Quantity">
-                                                        <div class="input-group-append">
-                                                            <button class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </button>
-                                                        </div>
-                                                    </div> <!-- input-group.// -->
-                                                </div> <!-- col.// -->
-                                            </td>
-                                            <td>
-                                                <div class="price-wrap">
-                                                    <var class="price">$@((item.Quantity * item.Product.SalesPrice))</var>
-                                                    <small class="text-muted"> $@item.Product.SalesPrice each </small>
-                                                </div> <!-- price-wrap .// -->
-                                            </td>
-                                            <td class="text-right">
-                                                @using (Html.BeginForm("RemoveFromCart", "Home", FormMethod.Post))
-                                                {
-                                                    @Html.Hidden("ProductId", item.Product.ProductID)
-                                                    <input class="btn btn-sm btn-warning" type="submit" value="Remove" />
-                                                }
-                                                @*<a href="" class="btn btn-danger"> Remove</a>*@
-                                            </td>
-                                        </tr>
-                                    }
+                                }
 
 
 
 
 
-                                </tbody>
-                            </table>
-                        }
-                        else
-                        {
-                            <div class="alert alert-warning" role="alert">
-                                Your Shopping Basket is Empty 
-                            </div>
-                        }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning" role="alert">
+                            Your Shopping Basket is Empty
+                        </div>
+                    }
 
-                    </div> <!-- card.// -->
+                </div> <!-- card.// -->
 
-                </aside> <!-- col.// -->
-                <aside class="col-lg-3">
-
-                    <div class="card">
-                        <div class="card-body">
-                            <dl class="dlist-align">
-                                <dt>Total price:</dt>
-                                <dd class="text-right">$((@Model.ComputeTotalValue()+10).ToString("c"))</dd>
-                            </dl>
-                            <dl class="dlist-align">
-                                <dt>Tax:</dt>
-                                <dd class="text-right"> $10.00</dd>
-                            </dl>
-                            <dl class="dlist-align">
-                                <dt>Total:</dt>
-                                <dd class="text-right text-dark b"><strong>$@Model.ComputeTotalValue().ToString("c")</strong></dd>
-                            </dl>
-                            <hr>
-                            <p class="text-center mb-3">
-                                <img src="~/greatkart/images/misc/payments.png" height="26">
-                            </p>
-                            <a href="/Home/CheckOut/" class="btn btn-primary btn-block"> Checkout </a>
-                            <a href="/Home/Store/" class="btn btn-light btn-block">Continue Shopping</a>
-                        </div> <!-- card-body.// -->
-                    </div> <!-- card.// -->
-
-                </aside> <!-- col.// -->
+            </aside> <!-- col.// -->
 
 
-            </div> <!-- row.// -->
-            <!-- ============================ COMPONENT 1 END .// ================================= -->
+            <aside class="col-lg-3">
 
-        </div> <!-- container .//  -->
-    </section>
+                <div class="card">
+                    <div class="card-body">
+                        <dl class="dlist-align">
+                            <dt>Total price:</dt>
+                            <dd class="text-right">$((@Model.ComputeTotalValue()+10).ToString("c"))</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Tax:</dt>
+                            <dd class="text-right"> $10.00</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Total:</dt>
+                            <dd class="text-right text-dark b"><strong>$@Model.ComputeTotalValue().ToString("c")</strong></dd>
+                        </dl>
+                        <hr>
+                        <p class="text-center mb-3">
+                            <img src="~/greatkart/images/misc/payments.png" height="26">
+                        </p>
+                        <a href="/Home/CheckOut/" class="btn btn-primary btn-block"> Checkout </a>
+                        <a href="/Home/Store/" class="btn btn-light btn-block">Continue Shopping</a>
+                    </div> <!-- card-body.// -->
+                </div> <!-- card.// -->
+
+            </aside> <!-- col.// -->
 
 
+        </div> <!-- row.// -->
+        <!-- ============================ COMPONENT 1 END .// ================================= -->
+
+    </div> <!-- container .//  -->
+</section>
+
+@*<script type="text/javascript">
+
+        $(function () {
+            var value = document.getElementById("spnCart").value;
+            var unitPrice = $("#text-muted").text()
+            alert(unitPrice)
+            /*var productQuantity = parseInt($(this).closest('tr').prop('id'));*/
+
+            $('#button-minus').click(function () {
+                if (value == 0) return;
+                value--;
+                $('#spnCart').val(value);
+                $('#price').val((parseInt(value) * parseInt(unitPrice)));
+              });
+
+            $('#button-plus').click(function () {
+
+                value++;
+                $('#spnCart').val(value);
+                $('#price').val((parseInt(value) * parseInt(unitPrice)));
+
+            });
+        });
+
+
+    </script>*@
+<script>
+    //$(document).ready(function () {
+
+    //    $('#button-plus').on('click', function () {
+    //        var getItemId = parseInt($(this).closest('tr').prop('id'));
+    //        alert(getItemId)
+    //        /*var getUserName = $('.divName').html();*/
+    //        $.ajax({
+    //            type: 'POST',
+    //            contentType: 'application/json; charset=utf-8',
+    //            url: 'Home/AddToCart',
+    //            data: "{ 'productId':' " + getItemId + "' }",
+    //            success: function (data) {
+    //               /* $('#spnCart').val(data)*/
+
+    //                alert(success)
+    //            },
+    //            error: function (data) {
+    //                alert(data);
+    //            }
+    //        });
+    //    });
+
+
+
+        //$(document).delegate('.cartDel', 'click', function () {
+        //    var DeleteItem = parseInt($(this).closest('tr').prop('id'));
+        //    $.ajax({
+        //        type: 'POST',
+        //        contentType: 'application/json; charset=utf-8',
+        //        url: '/Home/DeleteCart',
+        //        data: "{ 'itemId':' " + DeleteItem + "' }",
+        //        success: function (data) {
+        //            $('#exampleModal').html(data);
+        //            $('#spnCart').html($(data).find('#cartList tbody tr').length);
+        //            $('#exampleModal').modal({
+        //                backdrop: false
+        //            });
+        //        },
+        //        error: function (data) {
+        //            alert(data);
+        //        }
+        //    });
+        //});
+    /* });*/
+</script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>

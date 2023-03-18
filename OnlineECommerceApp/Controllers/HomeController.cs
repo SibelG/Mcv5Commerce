@@ -50,6 +50,7 @@ namespace OnlineECommerceApp.Controllers
 
         public ActionResult Cart()
         {
+          
             return View(GetCart());
         }
         [HttpPost]
@@ -64,6 +65,21 @@ namespace OnlineECommerceApp.Controllers
 
             }
             return RedirectToAction("Cart","Home");
+        }
+
+        [HttpPost]
+
+        public ActionResult RemoveToItem(int ProductId)
+        {
+            var product = db.Products.FirstOrDefault(i => i.ProductID == ProductId);
+
+            if (product != null)
+            {
+                GetCart().RemoveItem(product, 1);
+
+            }
+           
+            return RedirectToAction("Cart", "Home");
         }
 
         [HttpPost]

@@ -247,7 +247,6 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\GraphicController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -3035,11 +3034,6 @@
     <Content Include="Views\Bills\Delete.cshtml" />
     <Content Include="Views\Bills\Edit.cshtml" />
     <Content Include="Views\Bills\Index.cshtml" />
-    <Content Include="Views\Expenses\Create.cshtml" />
-    <Content Include="Views\Expenses\Delete.cshtml" />
-    <Content Include="Views\Expenses\Details.cshtml" />
-    <Content Include="Views\Expenses\Edit.cshtml" />
-    <Content Include="Views\Expenses\Index.cshtml" />
     <Content Include="Views\SalesActions\Create.cshtml" />
     <Content Include="Views\SalesActions\Delete.cshtml" />
     <Content Include="Views\SalesActions\Details.cshtml" />
@@ -3049,11 +3043,6 @@
     <Content Include="Views\Personels\Details.cshtml" />
     <Content Include="Views\Personels\Edit.cshtml" />
     <Content Include="Views\Personels\Index.cshtml" />
-    <Content Include="Views\BillPencils\Create.cshtml" />
-    <Content Include="Views\BillPencils\Delete.cshtml" />
-    <Content Include="Views\BillPencils\Details.cshtml" />
-    <Content Include="Views\BillPencils\Edit.cshtml" />
-    <Content Include="Views\BillPencils\Index.cshtml" />
     <Content Include="Views\Departments\PersonelSales.cshtml" />
     <Content Include="Views\Caris\SalesHistory.cshtml" />
     <Content Include="Views\Bills\BillPencilDetails.cshtml" />
@@ -3238,12 +3227,11 @@
     <Content Include="Views\Home\Basket.cshtml" />
     <Content Include="Views\Home\Complated.cshtml" />
     <Content Include="Views\Home\OrderDetails.cshtml" />
+    <Content Include="Views\Home\_HeaderPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Image\" />
-    <Folder Include="Views\Cart\" />
-    <Folder Include="Views\Message\" />
     <Folder Include="Views\Orders\" />
   </ItemGroup>
   <ItemGroup>

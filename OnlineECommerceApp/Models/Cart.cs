@@ -30,6 +30,17 @@ namespace OnlineECommerceApp.Models
                 line.Quantity += quantity;
             }
         }
+        public void RemoveItem(Product product, int quantity)
+        {
+            var line = lineCollection.FirstOrDefault(x => x.Product.ProductID == product.ProductID);
+
+         
+            if(line!=null)
+            {
+                line.Quantity -= quantity;
+
+            }
+        }
 
         //Removes the entire line item for the specific product
         public void RemoveLine(Product product)
